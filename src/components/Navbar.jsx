@@ -31,11 +31,7 @@ const Navbar = () => {
                         LOGIN
                     </Button>     
                 ]}
-                extra={[
-                    <Button key="1" type="primary" onClick={handlesignupButton}>
-                     LOGIN
-                 </Button>
-                ]}
+               
             />
         </>
     )

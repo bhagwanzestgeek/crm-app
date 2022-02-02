@@ -1,13 +1,3 @@
-// import React from 'react';
-// import { connect } from 'react-redux';
-// import Home from './index';
-
-// const DashboardContainer = WrappedComponent => {
-//     return (
-//         // 
-//     )
-// }
-
 // const mapStateToProps = (state) => {
 //   return {
 //     state
@@ -26,11 +16,12 @@
 import React, { Suspense } from 'react';
 
 export default function withDashboard(WrapperComponent){
+	console.log("with Dashboard hoc");
 	return(
-		<>
+		<div>
 			<Suspense fallback={<div>Loading....</div>}>
 				<WrapperComponent></WrapperComponent>
 			</Suspense>
-		</>
+		</div>
 	);
 }

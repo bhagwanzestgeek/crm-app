@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 
-
 const HomePage = React.lazy(() => import('./components/HomePage'));
 const Signup=React.lazy(()=> import('./components/Auth/Signup'))
 const Login = React.lazy(() => import('./components/Auth/Login'));
@@ -16,7 +15,6 @@ function App() {
 
   console.log('Initial User Data : ', user);
 
-
   return (
     <div className="App">
       <Suspense fallback={<div>Loading...</div>}>
@@ -26,7 +24,11 @@ function App() {
             <Route path='/' element={ <HomePage/> } />
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={ <Login/> }/>
+            <Route path='/forget_password' element={ <p>Reset Your Password Here</p> }/>
             <Route path='/dashboard' element={ <Dashboard/> }/>
+            <Route path='/user/edit/<int:id>' element={ <p>Edit User Details</p> }/>
+            <Route path='/user/delete/<int:id>' element={ <p>Dele User</p> }/>
+            <Route path='/user/<int:id>' element={ <p>Dele User</p> }/>
           </Routes>
         </Router>
       </Suspense>

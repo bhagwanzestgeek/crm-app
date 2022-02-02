@@ -29,7 +29,10 @@ const Navbar = () => {
                 extra={[
                     <Button key="1" type="primary" onClick={handleLoginButton}>
                         LOGIN
-                    </Button>     
+                    </Button>,
+                    <Button key="1" type="primary" onClick={handleLoginButton}>
+                    Register
+                </Button>    
                 ]}
                
             />

@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 
@@ -9,6 +10,12 @@ const Dashboard = React.lazy(() => import('./components/Dashboard'));
 
 
 function App() {
+
+  const user = useSelector(state => state.user);
+
+  console.log('Initial User Data : ', user);
+
+
   return (
     <div className="App">
       <Suspense fallback={<div>Loading...</div>}>

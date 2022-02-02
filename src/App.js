@@ -5,9 +5,10 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 
 const HomePage = React.lazy(() => import('./components/HomePage'));
-const LoginComponent = React.lazy(() => import('./components/LoginComponent'));
+const Signup=React.lazy(()=> import('./components/Auth/Signup'))
+const Login = React.lazy(() => import('./components/Auth/Login'));
 const Dashboard = React.lazy(() => import('./components/Dashboard'));
-
+ 
 
 function App() {
 
@@ -23,7 +24,8 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element={ <HomePage/> } />
-            <Route path='/login' element={ <LoginComponent/> }/>
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/login' element={ <Login/> }/>
             <Route path='/dashboard' element={ <Dashboard/> }/>
           </Routes>
         </Router>

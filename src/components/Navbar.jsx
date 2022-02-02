@@ -17,6 +17,10 @@ const Navbar = () => {
         navigate("/login", { replace: true });
     }
 
+    const handlesignupButton = () => {
+        navigate("/signup", { replace: true });
+    }
+
     return (
         <>
             <PageHeader
@@ -24,12 +28,16 @@ const Navbar = () => {
                 className="site-page-header"
                 // onBack={() => null}
                 title="React CRM"
-
                 onBack={() => window.history.back()}
                 extra={[
                     <Button key="1" type="primary" onClick={handleLoginButton}>
                         LOGIN
-                    </Button>,
+                    </Button>     
+                ]}
+                extra={[
+                    <Button key="1" type="primary" onClick={handlesignupButton}>
+                     LOGIN
+                 </Button>
                 ]}
             />
         </>

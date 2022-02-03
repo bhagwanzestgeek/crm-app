@@ -22,9 +22,9 @@ function App() {
          {/* <Navbar />  */}
         <Router>
           <Routes>
-            <Route path='/' element={ <HomePage/> } />
+            <Route path='/' element={ <Login/> } />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/login' element={ <Login/> }/>
+            <Route path='/dashboard' element={ <HomePage/> }/>
             <Route path='/forget_password' element={ <p>Reset Your Password Here</p> }/>
             <Route path='/dashboard' element={ <Dashboard/> }/>
             <Route path='/user/edit/<int:id>' element={ <p>Edit User Details</p> }/>

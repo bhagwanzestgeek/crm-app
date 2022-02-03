@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 
 
-const HomePage = React.lazy(() => import('./components/HomePage'));
+const HomePage = React.lazy(() => import('./components/Dashboard/Navbar/Index'));
 const Signup=React.lazy(()=> import('./components/Auth/Signup'))
 const Login = React.lazy(() => import('./components/Auth/Login'));
 const Dashboard = React.lazy(() => import('./components/Dashboard'));

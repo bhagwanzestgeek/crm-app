@@ -27,9 +27,10 @@ function App() {
             <Route path='/dashboard' element={ <HomePage/> }/>
             <Route path='/forget_password' element={ <p>Reset Your Password Here</p> }/>
             <Route path='/dashboard' element={ <Dashboard/> }/>
-            <Route path='/user/edit/<int:id>' element={ <p>Edit User Details</p> }/>
-            <Route path='/user/delete/<int:id>' element={ <p>Dele User</p> }/>
-            <Route path='/user/<int:id>' element={ <p>Dele User</p> }/>
+            <Route path='/user/edit/:id' element={ <p>Edit User Details</p> }/>
+            <Route path='/user/delete/:id' element={ <p>Dele User</p> }/>
+            <Route path='/user/:id' element={ <p>Dele User</p> }/>
+            <Route path='/user/projComponent' element={ <p>Material Ui Project</p> }/>
           </Routes>
         </Router>
       </Suspense>

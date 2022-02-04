@@ -40,8 +40,7 @@ const Dashboard = () => {
 				<Box sx={{ flexGrow: 1 }}>
 					<Grid container spacing={2}>
 						<Grid item xs={4}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat hic et quidem unde ipsa deserunt dolorum est sed maiores eligendi qui rem dolorem sit pariatur nisi a, quo aliquam officiis consequuntur expedita officia tenetur saepe repudiandae deleniti? Explicabo minima obcaecati amet voluptate velit at deserunt ipsum, sequi dolorum non. Minima provident quod facere cumque consequatur sequi similique laudantium fugiat fuga.
-							<p></p>
+							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat hic et quidem unde ipsa deserunt dolorum est sed maiores eligendi qui rem dolorem sit pariatur nisi a, quo aliquam officiis consequuntur expedita officia tenetur saepe repudiandae deleniti? Explicabo minima obcaecati amet voluptate velit at deserunt ipsum, sequi dolorum non. Minima provident quod facere cumque consequatur sequi similique laudantium fugiat fuga.</p>
 						</Grid>
 						<Grid item xs={8}>
 							<Table />

@@ -7,8 +7,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-
-import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -27,10 +25,10 @@ function createData(name, email, phone, address, id){
 
 const rows = [
 	createData('Tony Stark', 'stark.zestgeek@gmail.com', '+91 9999999990', 'Chandigarh', 1),
-	createData('Bruce Banner', 'banner.zestgeek@gmail.com', '+91 9999999991', 'Kolkata', 1),
-	createData('Thor Odinson', 'thor.zestgeek@gmail.com', '+91 9999999992', 'Vaizag', 1),
-	createData('Peeter Parker', 'peeter.zestgeek@gmail.com', '+91 9999999993', 'Gangtok', 1),
-	createData('Steve Rogers', 'captain.zestgeek@gmail.com', '+91 9999999994', 'Mohali', 1),
+	createData('Bruce Banner', 'banner.zestgeek@gmail.com', '+91 9999999991', 'Kolkata', 2),
+	createData('Thor Odinson', 'thor.zestgeek@gmail.com', '+91 9999999992', 'Vaizag', 3),
+	createData('Peeter Parker', 'peeter.zestgeek@gmail.com', '+91 9999999993', 'Gangtok', 4),
+	createData('Steve Rogers', 'captain.zestgeek@gmail.com', '+91 9999999994', 'Mohali', 5),
 ];
 
 export default function AcccessibleTable() {
@@ -59,10 +57,9 @@ export default function AcccessibleTable() {
 		<Paper sx={{ width: '100%', overflow: 'hidden' }}>
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} aria-label="caption table">
-				<caption>A basic table example with a caption</caption>
 				<TableHead>
 					<TableRow>
-						<TableCell>Full name</TableCell>
+						<TableCell align="left">Full name</TableCell>
 						<TableCell align="center">Email</TableCell>
 						<TableCell align="center">Phone Number</TableCell>
 						<TableCell align="center">Address</TableCell>

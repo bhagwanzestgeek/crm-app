@@ -13,34 +13,50 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from "axios";
+import jsonData from './data.json'
 
-function Copyright(props: any) {
-	return (
-		<Typography variant="body2" color="text.secondary" align="center" {...props}>
-			{'Copyright © '}
-			<Link color="inherit" href="https://mui.com/">
-				Your Website
-			</Link>{' '}
-			{new Date().getFullYear()}
-			{'.'}
-		</Typography>
-	);
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
 
 const theme = createTheme();
 
 export default function SignIn() {
-
-	const navigate = useNavigate();
-
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		// eslint-disable-next-line no-console
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-		});
+	const navigate = useNavigate();     
+	const[name,setName]=React.useState({
+		email:'',
+		password:'',
+		remember: false
+	})
+	const{ email, password}=name;
+    const eventHandler=(e)=>{
+		setName({...name,[e.target.name]: e.target.value})
+	}
+	const handleSubmit = (event) => {
+		const user= {
+			email:'narender',
+			password:12345678
+		}
+	event.preventDefault();
+	const data = {...name}
+	console.log(data,"datatatata")
+	if(name.email === user.email ){
+		navigate("/dashboard");
+	}
+	else {
+		 navigate('/')
+	}
 	};
 
 	const handleForgetPassword = (event) => {
@@ -81,8 +97,10 @@ export default function SignIn() {
 							id="email"
 							label="Email Address"
 							name="email"
-							autoComplete="email"
-							autoFocus
+							// autoComplete="email"
+							// autoFocus
+							value={email}
+							onChange={eventHandler}
 						/>
 						<TextField
 							margin="normal"
@@ -93,6 +111,8 @@ export default function SignIn() {
 							type="password"
 							id="password"
 							autoComplete="current-password"
+							value={password}
+							onChange={eventHandler}
 						/>
 						<FormControlLabel
 							control={<Checkbox value="remember" color="primary" />}

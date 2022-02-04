@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 
-const HomePage = React.lazy(() => import('./components/HomePage'));
+
+const HomePage = React.lazy(() => import('./components/Dashboard/Navbar/Index'));
 const Signup=React.lazy(()=> import('./components/Auth/Signup'))
 const Login = React.lazy(() => import('./components/Auth/Login'));
 const Dashboard = React.lazy(() => import('./components/Dashboard'));
@@ -21,9 +22,9 @@ function App() {
          {/* <Navbar />  */}
         <Router>
           <Routes>
-            <Route path='/' element={ <HomePage/> } />
+            <Route path='/' element={ <Login/> } />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/login' element={ <Login/> }/>
+            <Route path='/dashboard' element={ <HomePage/> }/>
             <Route path='/forget_password' element={ <p>Reset Your Password Here</p> }/>
             <Route path='/dashboard' element={ <Dashboard/> }/>
             <Route path='/user/edit/:id' element={ <p>Edit User Details</p> }/>

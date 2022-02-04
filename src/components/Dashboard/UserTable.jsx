@@ -13,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useNavigate } from 'react-router-dom';
+import TablePagination from '@mui/material/TablePagination';
 
 // function createData(name, calories, fat, carbs, protein) {
 // 	return { name, calories, fat, carbs, protein };
@@ -53,6 +54,7 @@ export default function AcccessibleTable() {
 	}
 
 	return (
+		<Paper sx={{ width: '100%', overflow: 'hidden' }}>
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} aria-label="caption table">
 				<TableHead>
@@ -84,5 +86,16 @@ export default function AcccessibleTable() {
 				</TableBody>
 			</Table>
 		</TableContainer>
-	);
+		{/* <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      /> */}
+		</Paper>
+		
+	)
 }

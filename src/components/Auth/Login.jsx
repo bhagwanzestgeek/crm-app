@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,63 +13,66 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import axios from "axios";
-import jsonData from './data.json'
+
+
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+	return (
+		<Typography variant="body2" color="text.secondary" align="center" {...props}>
+			{'Copyright © '}
+			<Link color="inherit" href="https://mui.com/">
+				Your Website
+			</Link>{' '}
+			{new Date().getFullYear()}
+			{'.'}
+		</Typography>
+	);
 }
 
 const theme = createTheme();
 
 export default function SignIn() {
-	const navigate = useNavigate();     
-	const[name,setName]=React.useState({
-		email:'',
-		password:'',
-		remember: false
-	})
-	const{ email, password}=name;
-    const eventHandler=(e)=>{
-		setName({...name,[e.target.name]: e.target.value})
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	console.log('Login email:', email, ', password: ', password);
+
+	const navigate = useNavigate();
+
+	const auth = getAuth();
+
+	const handleSignIn = (event) => {
+		event.preventDefault();
+		console.log("Authenticating user from firebase....");
+		signInWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				console.log("User is successfully signed in...")
+				const user = userCredential.user;
+				// ...
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log("User sign in failed with error code: ", error.code, ", error message : ", error.message);
+			});
 	}
-	const handleSubmit = (event) => {
-		const user= {
-			email:'narender',
-			password:12345678
-		}
-	event.preventDefault();
-	const data = {...name}
-	console.log(data,"datatatata")
-	if(name.email === user.email ){
-		navigate("/dashboard");
-	}
-	else {
-		 navigate('/')
-	}
-	};
+
+
+
 
 	const handleForgetPassword = (event) => {
+		// function for handling "Forget Password Button"
 		event.preventDefault();
 		console.log("handling forget password button");
 		navigate('/forget_password')
 	}
 
-	const handleSignin = (event) => {
-        event.preventDefault();
-        console.log("handling Already have an account! Signup Button");
-        navigate('/signup')
-    }
+	const handleSignUp = (event) => {
+		// function for handling "Already have an Account"
+		event.preventDefault();
+		console.log("handling Already have an account! Signup Button");
+		navigate('/signup')
+	}
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -89,7 +92,7 @@ export default function SignIn() {
 					<Typography component="h1" variant="h5">
 						Sign in
 					</Typography>
-					<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+					<Box component="form" noValidate sx={{ mt: 1 }}>
 						<TextField
 							margin="normal"
 							required
@@ -100,7 +103,7 @@ export default function SignIn() {
 							// autoComplete="email"
 							// autoFocus
 							value={email}
-							onChange={eventHandler}
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<TextField
 							margin="normal"
@@ -112,20 +115,20 @@ export default function SignIn() {
 							id="password"
 							autoComplete="current-password"
 							value={password}
-							onChange={eventHandler}
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<FormControlLabel
 							control={<Checkbox value="remember" color="primary" />}
 							label="Remember me"
 						/>
+
 						<Button
 							type="submit"
 							fullWidth
 							variant="contained"
 							sx={{ mt: 3, mb: 2 }}
-						>
-							Sign In
-						</Button>
+							onClick={handleSignIn}
+						> Sign In </Button>
 						<Grid container>
 							<Grid item xs>
 								<Link onClick={handleForgetPassword} variant="body2">
@@ -133,7 +136,7 @@ export default function SignIn() {
 								</Link>
 							</Grid>
 							<Grid item>
-								<Link onClick={handleSignin} variant="body2">
+								<Link onClick={handleSignUp} variant="body2">
 									{"Don't have an account? Sign Up"}
 								</Link>
 							</Grid>

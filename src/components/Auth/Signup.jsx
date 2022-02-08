@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React  from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +13,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import {auth} from '../../firebase'
+import {createUserWithEmailAndPassword} from 'firebase/auth'
+
+
 
 function Copyright(props) {
     return (
@@ -30,17 +34,46 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+     const[error,setError]=React.useState(false)
+const [user,setUser]=React.useState({
+    firstName:'',
+    lastName:'',
+    email:'',
+    password:'',
+    confirmPassword:''
+})
+const {firstName,lastName,email,password,confirmPassword}=user
 
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+      setUser({...user,[event.target.name]:event.target.value})
+      let isValid=true
+      if(password !=='' && confirmPassword !==''){
+          console.log(password, "password")
+          console.log(confirmPassword, "confirmPassword")
+          console.log(password !== confirmPassword, "password !== confirmPassword")
+          if(password === confirmPassword){
+              createUserWithEmailAndPassword(auth,email,password)
+              .then((response)=>{
+                  console.log(response,"response")
+                  navigate('/')
+              })
+              .catch((error)=>{
+                  console.log(error,"errorerror")
+              })
+          }
+          else{
+            isValid=false
+            setError('Password does not match')
+          }
+      }
+      console.log(user,"usersuer")
+      console.log(error,"errorerror")
+
+      return isValid
+        
     };
 
     const handleSignin = (event) => {
@@ -48,7 +81,6 @@ export default function SignUp() {
         console.log("handling Already have an account! Signup Button");
         navigate('/login')
     }
-
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
@@ -78,6 +110,8 @@ export default function SignUp() {
                                     id="firstName"
                                     label="First Name"
                                     autoFocus
+                                    value={firstName}
+                                    onChange={handleSubmit}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -88,6 +122,8 @@ export default function SignUp() {
                                     label="Last Name"
                                     name="lastName"
                                     autoComplete="family-name"
+                                    value={lastName}
+                                    onChange={handleSubmit}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -98,6 +134,8 @@ export default function SignUp() {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
+                                    value={email}
+                                    onChange={handleSubmit}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -109,6 +147,21 @@ export default function SignUp() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
+                                    value={password}
+                                    onChange={handleSubmit}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    name="confirmPassword"
+                                    label="Conform Password"
+                                    type="password"
+                                    id="confirmPassword"
+                                    autoComplete="new-password"
+                                    value={confirmPassword}
+                                    onChange={handleSubmit}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -123,6 +176,7 @@ export default function SignUp() {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            onClick={handleSubmit}
                         >
                             Sign Up
                         </Button>
